@@ -1,0 +1,80 @@
+﻿ @model AppWeb_TinderTec.Models.Usuario
+ <script type="text/javascript">
+     $("#btnBuscarAmistad").addClass("selected");
+</script>  
+
+@if (ViewBag.mensajeLike =="MATCH" )
+{
+     <div class="modal card" id="deleteModal" tabindex="100" role="dialog" aria-labelledby="lblDeleteModal" style="display:block;height: auto;"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form class="modal-content" action="BuscarAmistad" method="get" style="align-items:center">
+                    <div class="modal-header">
+                        <div >
+                            <h2 class="animacion">Match</h2>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center !important;">
+                        <div>
+                            <button type="submit" class="btn btn-primary" style=" background-color: #fc4c6c; color: white; padding: 14px 20px;margin-bottom: 8px; border: none;border-radius: 4px;cursor: pointer;font-family: Roboto Slab;" >Aceptar</button>
+                            @Html.ActionLink("Ir a mis Matchs", "Matchs", "BuscarAmistad")
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div> 
+   
+   
+}
+
+@if ( ViewBag.idValidacion == 0)
+{
+    <div class="container">
+        <div class="content">
+            <div class="card">
+                <div class="user" style=" margin-top: 158px;text-align: center;">
+                        <h4>@ViewBag.msjBuscarAmistadNull</h4>
+                </div>
+           </div>
+        </div>
+     </div>
+
+}
+else
+{   
+     
+        <div class="container">
+        <div class="content">
+           
+            <div class="card">
+                <div class="user">
+                    <img class="imagen" src="@Html.DisplayFor(model => model.foto1)" alt=""/>
+                    <div class="profile">
+                        <div class="name"> @Html.DisplayFor(model => model.nombres) ,<span>@Html.DisplayFor(model => model.edad)</span></div>
+                        <div class="local">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>a 20 quilometros de aqui</span>
+                        </div>
+                        <div class="carrera"> @Html.DisplayFor(model => model.carrera)</div>
+                        <div class="sede">@Html.DisplayFor(model => model.sede)</div>
+                        <div class="descripcion">@Html.DisplayFor(model => model.descripcion)<a href=""><span>ver mas</span></a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                    
+                @using (Html.BeginForm("Like", "BuscarAmistad", FormMethod.Post)){
+ 
+                                @Html.Hidden("codUsuarioliked",Model.cod_usu)
+                                <button class="heart" style=" border:none;" ><i class="fas fa-heart"> </i> </button> }
+                 @using (Html.BeginForm("dislike", "BuscarAmistad", FormMethod.Post)){
+ 
+                                @Html.Hidden("codUsuarioDisliked",Model.cod_usu)
+                                <button class="no" style=" border:none;"><i class="fas fa-times"></i></button> }
+                 
+            </div>
+        </div>
+    </div>
+}

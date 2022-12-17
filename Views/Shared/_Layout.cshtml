@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Tindertec" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tindertec</title>
+    <link rel="icon" type="image/png" href="~/css/tindertec_logo1.png">
+
+    <link rel="stylesheet" href="~/css/style-chat.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/media.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/style_buscar_amistad.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"
+        asp-append-version="true">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"
+        asp-append-version="true">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+        asp-append-version="true">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" asp-append-version="true"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
+        asp-append-version="true"></script>
+        <script src="https://kit.fontawesome.com/bb33457760.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="body">
+
+    <div class="container-noBT">
+        <div class="first-partition">
+
+            <div class="content-profile" style="background-image: url(@ViewBag.fotoURL);">
+            </div>
+            <span class="nombre-profile">
+                <h2>@ViewBag.nombre,@ViewBag.edad</h2>
+            </span>
+            <nav class="menuContainer ">
+                <ol class="menuDetails">
+                    
+                    <li id="btnBuscarAmistad" >
+                        @Html.ActionLink("Buscar Amistad", "BuscarAmistad", "BuscarAmistad" )
+                    </li>
+                    
+                    
+                    <li id="btnMantenerUsuario">
+                        @Html.ActionLink("Ver mi Perfil", "Mantener", "Usuario")
+                    </li>
+                    <li id="btnMatchs">
+                        @Html.ActionLink("Matchs y Chats", "Matchs", "BuscarAmistad")
+                    </li>
+                    <li id="btnMeGustas">
+                        @Html.ActionLink("Mis me Gustas", "MeGustas", "MeGustas")
+                    </li>
+                    <li id="btnSubscripcion">
+                        @Html.ActionLink("Subscripcion", "Planes", "Subscripcion")
+                        </li>
+                    <li id="btnCerrarSesion" style="margin-top:50px;">
+                        @Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Seguridad")
+                      </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="second-partition">
+                            @if (@ViewBag.Eliminado != null)
+                {
+                    <h1 class='alerta' style="margin-top:22px;color: crimson; font-weight: bold; position:absolute;margin-top: 6%;z-index: 2;margin-left: 32%;">@ViewBag.Eliminado</h1>
+                                                <script>
+                                                    window.setTimeout(function () {
+                                                        $(".alerta").fadeTo(500, 0).slideUp(500, function () {
+                                                            $(this).remove();
+                                                        });
+                                                    }, 2500);
+
+                                                </script>
+                }
+            <div class="app subs">
+                @RenderBody()
+            </div>
+            <header class="header">
+                <div class="logoContainer">               
+                        <img src="~/css/tindertec_logo1.png" class="logoImg">
+                </div>
+            </header>
+
+            <div class="container-tindertec">
+            </div>
+
+            <footer class="footer">
+                
+                @Html.ActionLink("Tindertec © 2022 Todos los derechos reservados.", "Index", "Home")
+            </footer>
+
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+
+    <script>
+    
+ $(document).ready(function(){
+	$("#btnBuscarAmistad").click(function(){
+		$("#btnBuscarAmistad").addClass("selected");
+	});
+	$("#btnMantenerUsuario").click(function(){
+		$("#btnMantenerUsuario").addClass("selected");
+	});
+	$("#btnMatchs").click(function(){
+		$("#btnMatchs").addClass("selected");
+	});
+	$("#btnMeGustas").click(function(){
+		$("#btnMeGustas").addClass("selected");
+	});
+	$("#btnSubscripcion").click(function(){
+		$("#btnSubscripcion").addClass("selected");
+	});
+	$("#btnCerrarSesion").click(function(){
+		$("#btnCerrarSesion").addClass("selected");
+	});
+
+});
+
+    </script>
